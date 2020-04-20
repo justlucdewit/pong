@@ -53,5 +53,12 @@ class Ball {
         this.dx = -1;
         this.dy = 0.5;
     }
+    checkCol(p, left) {
+        if (left) {
+            if (this.x <= p.x && this.y + this.height / 2 > p.y - p.height / 2 && this.y + this.height / 2 < p.y + p.height / 2) {
+                this.dx = Math.abs(this.dx);
+            }
+        }
+    }
 }
 exports.default = Ball;

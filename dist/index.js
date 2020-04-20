@@ -85,6 +85,8 @@ const pongGame = () => {
         ball.show();
         p1_pedal.show();
         p2_pedal.show();
+        ball.checkCol(p1_pedal, true);
+        ball.checkCol(p2_pedal, false);
         printScores_1.default(p1_score, p2_score);
     }, 30);
 };
