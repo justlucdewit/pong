@@ -56,10 +56,11 @@ const pongGame = () => {
                 }
         }
     });
+    // setup for game
     process.stdin.setRawMode(true);
+    console.clear();
     // main game loop
     setInterval(() => {
-        console.clear();
         if (ball.x < 0) {
             ball.reset();
             p2_score++;
@@ -80,8 +81,8 @@ const pongGame = () => {
         else if (keystate["down"]) {
             p2_pedal.move(1);
         }
-        ball.show();
         ball.update();
+        ball.show();
         p1_pedal.show();
         p2_pedal.show();
         printScores_1.default(p1_score, p2_score);
