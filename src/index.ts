@@ -2,8 +2,15 @@ import Ball from './ball'
 import printScores from './printScores'
 import Pedal from './pedal'
 const keypress = require("keypress");
+import { terminal } from 'terminal-kit'
 
 const pongGame = () => {
+	// game mode
+	let ai = false;
+	if (process.argv.length >= 3){
+		ai = process.argv[2] !== "-s" ? true : false;
+	}
+
 	// create game objects
 	const ball = new Ball();
 	const p1_pedal = new Pedal(5);
@@ -37,17 +44,21 @@ const pongGame = () => {
 				}
 				break;
 			case "up":
-				if (keystate["down"]){
-					keystate["down"] = false;
-				} else {
-					keystate["up"] = true;
+				if (!ai){
+					if (keystate["down"]){
+						keystate["down"] = false;
+					} else {
+						keystate["up"] = true;
+					}
 				}
 				break;
 			case "down":
-				if (keystate["up"]){
-					keystate["up"] = false;
-				} else {
-					keystate["down"] = true;
+				if (!ai){
+					if (keystate["up"]){
+						keystate["up"] = false;
+					} else {
+						keystate["down"] = true;
+					}
 				}
 		}
 	});
@@ -55,11 +66,9 @@ const pongGame = () => {
 	// setup for game
 	process.stdin.setRawMode(true);
 	console.clear();
-
+	terminal.windowTitle(process.argv.length.toString());
 	// main game loop
 	setInterval(() => {
-		
-
 		if (ball.x < 0){
 			ball.reset();
 			p2_score++;
@@ -68,6 +77,10 @@ const pongGame = () => {
 		if(ball.x > process.stdout.columns){
 			ball.reset();
 			p1_score++;
+		}
+
+		if (ai){
+			p2_pedal.autoMove(ball);
 		}
 
 		if (keystate["w"]){
@@ -85,11 +98,14 @@ const pongGame = () => {
 		ball.update();
 		ball.show();
 
+
 		p1_pedal.show();
 		p2_pedal.show();
 
 		ball.checkCol(p1_pedal, true);
 		ball.checkCol(p2_pedal, false);
+
+
 
 		printScores(p1_score, p2_score);
 	}, 30);

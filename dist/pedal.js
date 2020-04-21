@@ -41,5 +41,13 @@ class Pedal {
             this.y = process.stdout.rows - this.height / 2;
         }
     }
+    autoMove(b) {
+        if (b.y > this.y && Math.random() > .5) {
+            this.move(1);
+        }
+        else if (b.y < this.y && Math.random() > .5) {
+            this.move(-1);
+        }
+    }
 }
 exports.default = Pedal;

@@ -4,8 +4,8 @@ import pedal from './pedal'
 class Ball{
 	x = Math.floor(process.stdout.columns/2);
 	y = Math.floor(process.stdout.rows/2);
-	dx = Math.random()<0.5?1+Math.random():-1+Math.random();
-	dy = Math.random()<0.5?0.5+Math.random():-0.5+Math.random();
+	dx = Math.random()<0.5?1+Math.random():-1-Math.random();
+	dy = Math.random()<0.5?0.5+Math.random():-0.5-Math.random();
 	width = 2;
 	height = 2;
 
@@ -59,8 +59,8 @@ class Ball{
 		// reset ball position and velocity
 		this.x = Math.floor(process.stdout.columns/2);
 		this.y = Math.floor(process.stdout.rows/2);
-		this.dx = Math.random()<0.5?1+Math.random():-1+Math.random();
-		this.dy = Math.random()<0.5?0.5+Math.random():-0.5+Math.random();
+		this.dx = Math.random()<0.5?1+Math.random():-1-Math.random();
+		this.dy = Math.random()<0.5?0.5+Math.random():-0.5-Math.random();
 	}
 
 	checkCol(p:pedal, left:boolean){

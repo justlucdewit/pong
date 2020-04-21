@@ -1,4 +1,5 @@
 import { terminal } from 'terminal-kit'
+import Ball from './ball'
 
 class Pedal{
 	y = process.stdout.rows/2;
@@ -42,6 +43,14 @@ class Pedal{
 			this.y = this.height/2;
 		}else if (this.y > process.stdout.rows-this.height/2){
 			this.y = process.stdout.rows-this.height/2
+		}
+	}
+
+	autoMove(b:Ball){
+		if (b.y > this.y && Math.random() > .5){
+			this.move(1);
+		}else if (b.y < this.y  && Math.random() > .5){
+			this.move(-1);
 		}
 	}
 }

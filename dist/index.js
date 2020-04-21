@@ -7,7 +7,13 @@ const ball_1 = __importDefault(require("./ball"));
 const printScores_1 = __importDefault(require("./printScores"));
 const pedal_1 = __importDefault(require("./pedal"));
 const keypress = require("keypress");
+const terminal_kit_1 = require("terminal-kit");
 const pongGame = () => {
+    // game mode
+    let ai = false;
+    if (process.argv.length >= 3) {
+        ai = process.argv[2] !== "-s" ? true : false;
+    }
     // create game objects
     const ball = new ball_1.default();
     const p1_pedal = new pedal_1.default(5);
@@ -40,25 +46,30 @@ const pongGame = () => {
                 }
                 break;
             case "up":
-                if (keystate["down"]) {
-                    keystate["down"] = false;
-                }
-                else {
-                    keystate["up"] = true;
+                if (!ai) {
+                    if (keystate["down"]) {
+                        keystate["down"] = false;
+                    }
+                    else {
+                        keystate["up"] = true;
+                    }
                 }
                 break;
             case "down":
-                if (keystate["up"]) {
-                    keystate["up"] = false;
-                }
-                else {
-                    keystate["down"] = true;
+                if (!ai) {
+                    if (keystate["up"]) {
+                        keystate["up"] = false;
+                    }
+                    else {
+                        keystate["down"] = true;
+                    }
                 }
         }
     });
     // setup for game
     process.stdin.setRawMode(true);
     console.clear();
+    terminal_kit_1.terminal.windowTitle(process.argv.length.toString());
     // main game loop
     setInterval(() => {
         if (ball.x < 0) {
@@ -68,6 +79,9 @@ const pongGame = () => {
         if (ball.x > process.stdout.columns) {
             ball.reset();
             p1_score++;
+        }
+        if (ai) {
+            p2_pedal.autoMove(ball);
         }
         if (keystate["w"]) {
             p1_pedal.move(-1);
