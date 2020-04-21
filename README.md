@@ -1,6 +1,8 @@
 # Pong
 A pong game that runs inside your terminal!
 
+<img src="./imgs/pong.png">
+
 ## installation
 ```
 git clone https://github.com/justlucdewit/pong
