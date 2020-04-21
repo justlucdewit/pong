@@ -13,4 +13,4 @@ npm link
 
 ## usage
 Run `pong` in your terminal, and enjoy!
-use `pong -m` for multiplayer (one player uses ws controlls and the otherone uses the arrow keys)
+Use `pong -m` for multiplayer (one player uses ws controlls and the otherone uses the arrow keys)
