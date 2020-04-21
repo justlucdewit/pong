@@ -5,8 +5,8 @@ class Ball {
     constructor() {
         this.x = Math.floor(process.stdout.columns / 2);
         this.y = Math.floor(process.stdout.rows / 2);
-        this.dx = -1;
-        this.dy = 0.5;
+        this.dx = Math.random() < 0.5 ? 1 + Math.random() : -1 + Math.random();
+        this.dy = Math.random() < 0.5 ? 0.5 + Math.random() : -0.5 + Math.random();
         this.width = 2;
         this.height = 2;
     }
@@ -50,13 +50,20 @@ class Ball {
         // reset ball position and velocity
         this.x = Math.floor(process.stdout.columns / 2);
         this.y = Math.floor(process.stdout.rows / 2);
-        this.dx = -1;
-        this.dy = 0.5;
+        this.dx = Math.random() < 0.5 ? 1 + Math.random() : -1 + Math.random();
+        this.dy = Math.random() < 0.5 ? 0.5 + Math.random() : -0.5 + Math.random();
     }
     checkCol(p, left) {
         if (left) {
             if (this.x <= p.x && this.y + this.height / 2 > p.y - p.height / 2 && this.y + this.height / 2 < p.y + p.height / 2) {
                 this.dx = Math.abs(this.dx);
+                this.dy = (this.y - p.y) * 0.2;
+            }
+        }
+        else {
+            if (this.x >= p.x - p.width && this.y + this.height / 2 > p.y - p.height / 2 && this.y - this.height / 2 < p.y + p.height / 2) {
+                this.dx = -Math.abs(this.dx);
+                this.dy = (this.y - p.y) * 0.2;
             }
         }
     }

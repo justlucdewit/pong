@@ -14,7 +14,9 @@ class Pedal {
         for (let i = 0; i < this.width; i++) {
             outstr += " ";
         }
-        for (let ypos = this.y - this.height / 2 - (this.lastmove == 1); ypos < this.y + (this.height / 2) + (this.lastmove == -1); ypos++) {
+        let delta1 = this.lastmove == 1 ? 1 : 0;
+        let delta2 = this.lastmove == -1 ? 1 : 0;
+        for (let ypos = this.y - this.height / 2 - delta1; ypos < this.y + (this.height / 2) + delta2; ypos++) {
             terminal_kit_1.terminal.moveTo(this.x - this.width / 2, ypos);
             terminal_kit_1.terminal.blue(outstr);
         }
